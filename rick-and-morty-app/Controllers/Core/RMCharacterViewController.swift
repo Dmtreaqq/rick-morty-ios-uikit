@@ -1,5 +1,7 @@
 import UIKit
 
+// MARK: - read about String(describing:)
+
 class RMCharacterViewController: UIViewController {
 
     override func viewDidLoad() {
@@ -8,13 +10,13 @@ class RMCharacterViewController: UIViewController {
         view.backgroundColor = .systemBackground
         title = "Characters"
         
-        let queryParams = [URLQueryItem(name: "name", value: "Rick"), URLQueryItem(name: "status", value: "alive")]
-        let request = RMRequest(endpoint: .character, queryParameters: queryParams)
-        
-        print(request.url!)
-        
-        RMService.shared.execute(request, expecting: RMCharacter.self) { result in
-            print(result)
+        RMService.shared.execute(.listCharactersRequest, expecting: RMGetAllCharactersResponse.self) { result in
+            switch result {
+            case .success(let model):
+                print(String(describing: model))
+            case .failure(let error):
+                print(String(describing: error))
+            }
         }
     }
 }
