@@ -7,6 +7,8 @@
 
 import UIKit
 
+
+/// MainController that workes as a rootViewController
 class RMTabBarController: UITabBarController {
 
     override func viewDidLoad() {
