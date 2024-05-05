@@ -23,6 +23,9 @@
 		63D11BC92BE624A400474DCB /* RMLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D11BC82BE624A400474DCB /* RMLocationViewController.swift */; };
 		63D11BCB2BE624B500474DCB /* RMEpisodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D11BCA2BE624B500474DCB /* RMEpisodeViewController.swift */; };
 		63D11BCD2BE624C300474DCB /* RMSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D11BCC2BE624C300474DCB /* RMSettingsViewController.swift */; };
+		63E078182BE7FC0300E36B8B /* CharacterListViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E078172BE7FC0300E36B8B /* CharacterListViewViewModel.swift */; };
+		63E0781C2BE7FC8D00E36B8B /* CharacterListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E0781B2BE7FC8D00E36B8B /* CharacterListView.swift */; };
+		63E0781E2BE8097400E36B8B /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E0781D2BE8097400E36B8B /* Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +47,9 @@
 		63D11BC82BE624A400474DCB /* RMLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RMLocationViewController.swift; sourceTree = "<group>"; };
 		63D11BCA2BE624B500474DCB /* RMEpisodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RMEpisodeViewController.swift; sourceTree = "<group>"; };
 		63D11BCC2BE624C300474DCB /* RMSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RMSettingsViewController.swift; sourceTree = "<group>"; };
+		63E078172BE7FC0300E36B8B /* CharacterListViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterListViewViewModel.swift; sourceTree = "<group>"; };
+		63E0781B2BE7FC8D00E36B8B /* CharacterListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterListView.swift; sourceTree = "<group>"; };
+		63E0781D2BE8097400E36B8B /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,6 +124,7 @@
 		63D11BB92BE621B400474DCB /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				63E0781B2BE7FC8D00E36B8B /* CharacterListView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -125,6 +132,7 @@
 		63D11BBA2BE621BA00474DCB /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				63E078172BE7FC0300E36B8B /* CharacterListViewViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -153,6 +161,7 @@
 				63D11BAF2BE61E4200474DCB /* LaunchScreen.storyboard */,
 				63D11BA42BE61E4000474DCB /* AppDelegate.swift */,
 				63D11BA62BE61E4000474DCB /* SceneDelegate.swift */,
+				63E0781D2BE8097400E36B8B /* Extensions.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -253,12 +262,15 @@
 				63D11BCB2BE624B500474DCB /* RMEpisodeViewController.swift in Sources */,
 				63D11BA52BE61E4000474DCB /* AppDelegate.swift in Sources */,
 				63D11BA72BE61E4000474DCB /* SceneDelegate.swift in Sources */,
+				63E0781C2BE7FC8D00E36B8B /* CharacterListView.swift in Sources */,
 				63D11BCD2BE624C300474DCB /* RMSettingsViewController.swift in Sources */,
 				63ABCEF12BE631F200774C76 /* RMService.swift in Sources */,
+				63E078182BE7FC0300E36B8B /* CharacterListViewViewModel.swift in Sources */,
 				63D11BC02BE623B600474DCB /* RMLocation.swift in Sources */,
 				63ABCEF52BE6343F00774C76 /* RMEndpoint.swift in Sources */,
 				63D11BC22BE623C500474DCB /* RMCharacter.swift in Sources */,
 				63ABCEF32BE6320E00774C76 /* RMRequest.swift in Sources */,
+				63E0781E2BE8097400E36B8B /* Extensions.swift in Sources */,
 				63ABCEF92BE6C73300774C76 /* RMAllGetCharactersResponse.swift in Sources */,
 				63D11BC72BE6249300474DCB /* RMCharacterViewController.swift in Sources */,
 			);
