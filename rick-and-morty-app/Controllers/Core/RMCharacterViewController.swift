@@ -4,7 +4,7 @@ import UIKit
 // MARK: - why Constraints should be after addSubview method
 
 class RMCharacterViewController: UIViewController {
-    private let characterListView = CharacterListView()
+    private let characterListView = RMCharacterListView()
     
     override func viewDidLoad() {
         super.viewDidLoad()

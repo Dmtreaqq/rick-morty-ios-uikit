@@ -7,16 +7,16 @@
 
 import Foundation
 
+enum ServiceError: Error {
+    case failedToCreateRequest
+    case failedToGetData
+}
+
 /// Singleton network service for doing HTTP requests
 final class RMService {
     static let shared = RMService()
     
     private init() {}
-    
-    enum ServiceError: Error {
-        case failedToCreateRequest
-        case failedToGetData
-    }
     
     // MARK: - Read about @escaping
     

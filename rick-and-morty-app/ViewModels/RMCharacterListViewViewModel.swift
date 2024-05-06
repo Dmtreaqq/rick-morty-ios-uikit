@@ -9,7 +9,7 @@ import UIKit
 
 // MARK: - Read about NSObject and that extension here
 
-class CharacterListViewViewModel: NSObject {
+class RMCharacterListViewViewModel: NSObject {
     func fetchCharacters() {
         RMService.shared.execute(.listCharactersRequest, expecting: RMGetAllCharactersResponse.self) { result in
             switch result {
@@ -22,16 +22,18 @@ class CharacterListViewViewModel: NSObject {
     }
 }
 
-extension CharacterListViewViewModel: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout  {
+extension RMCharacterListViewViewModel: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout  {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 20
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RMCharacterCollectionViewCell.cellIdentifier, for: indexPath) as? RMCharacterCollectionViewCell else {
+            return UICollectionViewCell()
+        }
+        let viewModel = RMCharacterCollectionViewCellViewModel(characterName: "Rick", characterStatus: .alive, characterImageUrl: URL(string: "https://rickandmortyapi.com/api/character/avatar/1.jpeg"))
         
-        cell.backgroundColor = .systemGreen
-        
+        cell.configure(with: viewModel)
         
         return cell
     }

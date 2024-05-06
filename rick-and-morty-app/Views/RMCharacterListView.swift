@@ -10,8 +10,8 @@ import UIKit
 // MARK: - Read about translatesAuto property and required init? NSCoder
 
 /// View that handles showing list of characters, lodaer, etc...
-class CharacterListView: UIView {
-    private let viewModel = CharacterListViewViewModel()
+class RMCharacterListView: UIView {
+    private let viewModel = RMCharacterListViewViewModel()
     
     private let spinner: UIActivityIndicatorView = {
         let spinner = UIActivityIndicatorView()
@@ -30,8 +30,7 @@ class CharacterListView: UIView {
         collectionView.alpha = 0
 
         collectionView.translatesAutoresizingMaskIntoConstraints = false
-        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell")
-        
+        collectionView.register(RMCharacterCollectionViewCell.self, forCellWithReuseIdentifier: RMCharacterCollectionViewCell.cellIdentifier)
         
         return collectionView
     }()
