@@ -7,6 +7,7 @@
 
 import UIKit
 
+// MARK: - Read about frame and bounds
 
 /// Single cell for a Character
 class RMCharacterCollectionViewCell: UICollectionViewCell {
@@ -15,6 +16,7 @@ class RMCharacterCollectionViewCell: UICollectionViewCell {
     private let imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
@@ -38,33 +40,60 @@ class RMCharacterCollectionViewCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         contentView.backgroundColor = .secondarySystemBackground
-        
         contentView.addSubviews(imageView, nameLabel, statusLabel)
         addConstraints()
+        self.setUpLayer()
+        
+        registerForTraitChanges([UITraitUserInterfaceStyle.self]) { [weak self] (_: Self, _: UITraitCollection) in
+            self?.setUpLayer()
+        }
     }
     
     required init?(coder: NSCoder) {
         fatalError("Unsupported")
     }
     
+    // DEPRECATED. IF DEPLOYMENT TARGET < 17.0, than we can use this one
+//    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+//        setUpLayer()
+//    }
+    
+    
+    /// Set up a layer with rounded corners and shadows
+    func setUpLayer() {
+        imageView.layer.cornerRadius = 4
+        imageView.layer.masksToBounds = true
+        
+        contentView.layer.cornerRadius = 4
+        // It is done for that "masksToBounds" doesn't clip the shadow!
+        contentView.layer.masksToBounds = false
+    
+        contentView.layer.shadowColor = UIColor.label.cgColor
+        contentView.layer.shadowRadius = 4
+        contentView.layer.shadowOffset = CGSize(width: 3, height: 3)
+        contentView.layer.shadowOpacity = 0.3
+        
+        imageView.frame = contentView.bounds
+    }
+    
     private func addConstraints() {
         NSLayoutConstraint.activate([
-            statusLabel.heightAnchor.constraint(equalToConstant: 40),
-            statusLabel.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 5),
-            statusLabel.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -5),
+            statusLabel.heightAnchor.constraint(equalToConstant: 30),
+            statusLabel.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 7),
+            statusLabel.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -7),
             statusLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -3),
             
-            nameLabel.heightAnchor.constraint(equalToConstant: 40),
-            nameLabel.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 5),
-            nameLabel.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -5),
-            nameLabel.bottomAnchor.constraint(equalTo: statusLabel.topAnchor, constant: -3),
+            nameLabel.heightAnchor.constraint(equalToConstant: 30),
+            nameLabel.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 7),
+            nameLabel.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -7),
+            nameLabel.bottomAnchor.constraint(equalTo: statusLabel.topAnchor),
             
             imageView.leftAnchor.constraint(equalTo: contentView.leftAnchor),
             imageView.rightAnchor.constraint(equalTo: contentView.rightAnchor),
             imageView.topAnchor.constraint(equalTo: contentView.topAnchor),
             imageView.bottomAnchor.constraint(equalTo: nameLabel.topAnchor, constant: -3),
         ])
-
+        
     }
     
     override func prepareForReuse() {
