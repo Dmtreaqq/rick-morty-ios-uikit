@@ -109,7 +109,6 @@ class RMCharacterCollectionViewCell: UICollectionViewCell {
         nameLabel.text = viewModel.characterName
         statusLabel.text = viewModel.characterStatusText
         viewModel.fetchImage { [weak self] result in
-            print("image downloaded")
             switch result {
             case .success(let data):
                 /// When dealing with the UI updates, changes should be done on main thread

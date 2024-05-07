@@ -8,11 +8,13 @@
 import Foundation
 
 class RMCharacterCollectionViewCellViewModel {
+    let id: Int
     let characterName: String
     private let characterStatus: RMCharacterStatus
     private let characterImageUrl: URL?
     
-    init(characterName: String, characterStatus: RMCharacterStatus, characterImageUrl: URL?) {
+    init(id: Int, characterName: String, characterStatus: RMCharacterStatus, characterImageUrl: URL?) {
+        self.id = id
         self.characterName = characterName
         self.characterStatus = characterStatus
         self.characterImageUrl = characterImageUrl
@@ -23,6 +25,8 @@ class RMCharacterCollectionViewCellViewModel {
     }
     
     func fetchImage(completion: @escaping(Result<Data, Error>) -> Void) {
+        
+        
         guard let characterImageUrl else { completion(.failure(URLError(.badURL))); return }
         let request = URLRequest(url: characterImageUrl)
         

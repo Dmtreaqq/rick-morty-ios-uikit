@@ -9,6 +9,7 @@ import UIKit
 
 protocol RMCharacterListViewViewModelDelegate: AnyObject {
     func didLoadInitialCharacters()
+    func didLoadMoreCharacters(with indexPaths: [IndexPath])
     func didSelectCharacter(character: RMCharacter)
 }
 
@@ -20,11 +21,11 @@ class RMCharacterListViewViewModel: NSObject {
     
     private var characters: [RMCharacter] = [] {
         didSet {
-            for character in characters {
+            for character in characters where !characterCellViewModels.contains(where: { $0.id == character.id }) {
                 let name = character.name
                 let status = character.status
                 let url = character.image
-                let viewModel = RMCharacterCollectionViewCellViewModel(characterName: name, characterStatus: status, characterImageUrl: URL(string: url))
+                let viewModel = RMCharacterCollectionViewCellViewModel(id: character.id, characterName: name, characterStatus: status, characterImageUrl: URL(string: url))
                 characterCellViewModels.append(viewModel)
             }
         }
@@ -60,9 +61,45 @@ class RMCharacterListViewViewModel: NSObject {
     }
     
     /// Paginate if additional characters are needed
-    func fetchAdditionalCharacters() {
+    func fetchAdditionalCharacters(url: URL) {
         isLoadingMoreCharacters = true
+        print("Fetching more chars")
         
+        guard let request = RMRequest(url: url) else {
+            isLoadingMoreCharacters = false
+            print("Failed to create request")
+            return
+        }
+        
+        RMService.shared.execute(request, expecting: RMGetAllCharactersResponse.self) { [weak self] result in
+            guard let strongSelf = self else { return }
+            
+            switch result {
+            case .success(let responseModel):
+                let moreResults = responseModel.results
+                let moreInfo = responseModel.info
+                
+                strongSelf.apiInfo = moreInfo
+                
+                let originalCount = strongSelf.characters.count
+                let newCount = moreResults.count
+                let total = originalCount + newCount
+                let startingIndex = total - newCount
+                let indexPathsToAdd: [IndexPath] = Array(startingIndex..<(startingIndex + newCount)).compactMap {
+                    return IndexPath(row: $0, section: 0)
+                }
+                
+                DispatchQueue.main.async {
+                    strongSelf.characters.append(contentsOf: moreResults)
+                    
+                    strongSelf.delegate?.didLoadMoreCharacters(with: indexPathsToAdd)
+                    strongSelf.isLoadingMoreCharacters = false
+                }
+                
+            case .failure(let error):
+                print("Error whilte loading more chars: \(error)")
+            }
+        }
     }
 }
 
@@ -107,7 +144,7 @@ extension RMCharacterListViewViewModel: UICollectionViewDataSource, UICollection
         }
         
         footer.startAnimating()
-                
+        
         return footer
     }
     
@@ -124,7 +161,12 @@ extension RMCharacterListViewViewModel: UICollectionViewDataSource, UICollection
 
 extension RMCharacterListViewViewModel: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        guard shouldShowLoadMoreIndicator, !isLoadingMoreCharacters else {
+        guard shouldShowLoadMoreIndicator, !isLoadingMoreCharacters, let nextUrlString = apiInfo?.next else {
+            return
+        }
+        
+        guard let url = URL(string: nextUrlString) else {
+            print("Invalid URL - \(nextUrlString)")
             return
         }
         
@@ -133,10 +175,11 @@ extension RMCharacterListViewViewModel: UIScrollViewDelegate {
         let totalScrollViewFixedHeight = scrollView.frame.size.height
         
         let diff = totalContentHeight - totalScrollViewFixedHeight - 120
-
+        
         
         if diff > 0 && offset >= diff {
-            fetchAdditionalCharacters()
+            
+            fetchAdditionalCharacters(url: url)
             
         }
     }
