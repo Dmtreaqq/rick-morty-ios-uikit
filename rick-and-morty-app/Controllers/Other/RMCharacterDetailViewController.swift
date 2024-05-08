@@ -28,6 +28,7 @@ class RMCharacterDetailViewController: UIViewController {
         super.viewDidLoad()
         
         characterDetailView.collectionView?.dataSource = self
+        characterDetailView.collectionView?.delegate = self
         
         view.backgroundColor = .systemBackground
         title = viewModel.title
@@ -58,35 +59,43 @@ extension RMCharacterDetailViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        switch section {
-        case 0:
-            1
-        case 1:
-            8
-        case 2:
-            20
-        default:
-            1
+        let sectionType = viewModel.sections[section]
+        
+        switch sectionType {
+        case .photo(_):
+            return 1
+        case .information(let viewModels):
+            return viewModels.count
+        case .episodes(let viewModels):
+            return viewModels.count
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
+        let sectionType = viewModel.sections[indexPath.section]
         
-        cell.backgroundColor = .green
-        
-        if indexPath.section == 0 {
-            cell.backgroundColor = .systemCyan
-        } else if indexPath.section == 1 {
-            cell.backgroundColor = .systemMint
-        } else {
-            cell.backgroundColor = .systemTeal
+        switch sectionType {
+        case .photo(let viewModel):
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RMPhotoCollectionViewCell.cellIdentifier, for: indexPath) as? RMPhotoCollectionViewCell else { fatalError("error photo cell") }
+            
+            cell.configure(with: viewModel)
+            
+            return cell
+        case .information(let viewModels):
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RMInfoCollectionViewCell.cellIdentifier, for: indexPath) as? RMInfoCollectionViewCell else {
+                fatalError("error photo cell") }
+            
+            cell.configure(with: viewModels[indexPath.row])
+            
+            return cell
+        case .episodes(let viewModels):
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RMEpisodeCollectionViewCell.cellIdentifier, for: indexPath) as? RMEpisodeCollectionViewCell else { fatalError("error photo cell") }
+            
+            cell.configure(with: viewModels[indexPath.row])
+            
+            return cell
         }
-        
-        return cell
     }
-    
-    
 }
 
 extension RMCharacterDetailViewController: UICollectionViewDelegate {
