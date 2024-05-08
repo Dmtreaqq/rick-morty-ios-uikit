@@ -10,10 +10,11 @@ import UIKit
 class RMCharacterDetailViewController: UIViewController {
     private let viewModel: RMCharacterDetailViewViewModel
     
-    private let characterDetailView = RMCharacterDetailView()
+    private let characterDetailView: RMCharacterDetailView
     
     init(viewModel: RMCharacterDetailViewViewModel) {
         self.viewModel = viewModel
+        self.characterDetailView = RMCharacterDetailView(frame: .zero, viewModel: viewModel)
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -25,6 +26,8 @@ class RMCharacterDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        characterDetailView.collectionView?.dataSource = self
         
         view.backgroundColor = .systemBackground
         title = viewModel.title
@@ -47,4 +50,36 @@ class RMCharacterDetailViewController: UIViewController {
             characterDetailView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
         ])
     }
+}
+
+extension RMCharacterDetailViewController: UICollectionViewDataSource {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        viewModel.sections.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        3
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
+        
+        cell.backgroundColor = .green
+        
+        if indexPath.section == 0 {
+            cell.backgroundColor = .systemCyan
+        } else if indexPath.section == 1 {
+            cell.backgroundColor = .systemMint
+        } else {
+            cell.backgroundColor = .systemTeal
+        }
+        
+        return cell
+    }
+    
+    
+}
+
+extension RMCharacterDetailViewController: UICollectionViewDelegate {
+    
 }
