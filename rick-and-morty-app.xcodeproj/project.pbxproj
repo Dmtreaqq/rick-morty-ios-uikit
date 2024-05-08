@@ -33,6 +33,7 @@
 		63E078292BE933EE00E36B8B /* RMCharacterDetailViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E078282BE933EE00E36B8B /* RMCharacterDetailViewViewModel.swift */; };
 		63E0782B2BE93F3D00E36B8B /* RMFooterLoadingReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E0782A2BE93F3D00E36B8B /* RMFooterLoadingReusableView.swift */; };
 		63E0782D2BEAC36200E36B8B /* RMImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E0782C2BEAC36200E36B8B /* RMImageManager.swift */; };
+		63E0782F2BEB6EB700E36B8B /* RMGetSingleCharacterResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E0782E2BEB6EB700E36B8B /* RMGetSingleCharacterResponse.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -64,6 +65,7 @@
 		63E078282BE933EE00E36B8B /* RMCharacterDetailViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RMCharacterDetailViewViewModel.swift; sourceTree = "<group>"; };
 		63E0782A2BE93F3D00E36B8B /* RMFooterLoadingReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RMFooterLoadingReusableView.swift; sourceTree = "<group>"; };
 		63E0782C2BEAC36200E36B8B /* RMImageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RMImageManager.swift; sourceTree = "<group>"; };
+		63E0782E2BEB6EB700E36B8B /* RMGetSingleCharacterResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RMGetSingleCharacterResponse.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,6 +93,7 @@
 			isa = PBXGroup;
 			children = (
 				63ABCEF82BE6C73300774C76 /* RMAllGetCharactersResponse.swift */,
+				63E0782E2BEB6EB700E36B8B /* RMGetSingleCharacterResponse.swift */,
 			);
 			path = ResponseTypes;
 			sourceTree = "<group>";
@@ -294,6 +297,7 @@
 				63D11BA52BE61E4000474DCB /* AppDelegate.swift in Sources */,
 				63E078252BE92ED700E36B8B /* RMCharacterDetailViewController.swift in Sources */,
 				63D11BA72BE61E4000474DCB /* SceneDelegate.swift in Sources */,
+				63E0782F2BEB6EB700E36B8B /* RMGetSingleCharacterResponse.swift in Sources */,
 				63E0782B2BE93F3D00E36B8B /* RMFooterLoadingReusableView.swift in Sources */,
 				63E078272BE9336000E36B8B /* RMCharacterDetailView.swift in Sources */,
 				63E0781C2BE7FC8D00E36B8B /* RMCharacterListView.swift in Sources */,
