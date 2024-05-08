@@ -8,5 +8,6 @@
 import Foundation
 
 struct RMInfoCollectionViewCellViewModel {
-    
+    let value: String
+    let title: String
 }

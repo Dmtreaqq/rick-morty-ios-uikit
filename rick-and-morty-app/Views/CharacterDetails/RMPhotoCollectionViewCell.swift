@@ -10,10 +10,19 @@ import UIKit
 class RMPhotoCollectionViewCell: UICollectionViewCell {
     static let cellIdentifier = "RMPhotoCollectionViewCell"
     
+    private let imageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        backgroundColor = .systemMint
+        contentView.addSubview(imageView)
+        addConstraints()
     }
     
     required init?(coder: NSCoder) {
@@ -21,14 +30,29 @@ class RMPhotoCollectionViewCell: UICollectionViewCell {
     }
     
     override func prepareForReuse() {
-        
+        super.prepareForReuse()
+        imageView.image = nil
     }
     
-    func setupConstraints() {
-        
+    func addConstraints() {
+        NSLayoutConstraint.activate([
+            imageView.leftAnchor.constraint(equalTo: contentView.leftAnchor),
+            imageView.rightAnchor.constraint(equalTo: contentView.rightAnchor),
+            imageView.topAnchor.constraint(equalTo: contentView.topAnchor),
+            imageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
+        ])
     }
     
     func configure(with viewModel: RMPhotoCollectionViewCellViewModel) {
-        
+        viewModel.fetchImage { [weak self] result in
+            switch result {
+            case .success(let data):
+                DispatchQueue.main.async {
+                    self?.imageView.image = UIImage(data: data)
+                }
+            case .failure(let error):
+                print(String(describing: error))
+            }
+        }
     }
 }

@@ -8,5 +8,5 @@
 import Foundation
 
 struct RMEpisodeCollectionViewCellViewModel {
-    
+    let episodeDataUrl: URL?
 }
