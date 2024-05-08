@@ -32,7 +32,7 @@
 		63E078272BE9336000E36B8B /* RMCharacterDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E078262BE9336000E36B8B /* RMCharacterDetailView.swift */; };
 		63E078292BE933EE00E36B8B /* RMCharacterDetailViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E078282BE933EE00E36B8B /* RMCharacterDetailViewViewModel.swift */; };
 		63E0782B2BE93F3D00E36B8B /* RMFooterLoadingReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E0782A2BE93F3D00E36B8B /* RMFooterLoadingReusableView.swift */; };
-		63E0782D2BEAC36200E36B8B /* ImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E0782C2BEAC36200E36B8B /* ImageManager.swift */; };
+		63E0782D2BEAC36200E36B8B /* RMImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E0782C2BEAC36200E36B8B /* RMImageManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -63,7 +63,7 @@
 		63E078262BE9336000E36B8B /* RMCharacterDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RMCharacterDetailView.swift; sourceTree = "<group>"; };
 		63E078282BE933EE00E36B8B /* RMCharacterDetailViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RMCharacterDetailViewViewModel.swift; sourceTree = "<group>"; };
 		63E0782A2BE93F3D00E36B8B /* RMFooterLoadingReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RMFooterLoadingReusableView.swift; sourceTree = "<group>"; };
-		63E0782C2BEAC36200E36B8B /* ImageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageManager.swift; sourceTree = "<group>"; };
+		63E0782C2BEAC36200E36B8B /* RMImageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RMImageManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -169,7 +169,7 @@
 		63D11BBC2BE621C900474DCB /* Managers */ = {
 			isa = PBXGroup;
 			children = (
-				63E0782C2BEAC36200E36B8B /* ImageManager.swift */,
+				63E0782C2BEAC36200E36B8B /* RMImageManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -288,7 +288,7 @@
 				63D11BC92BE624A400474DCB /* RMLocationViewController.swift in Sources */,
 				63D11BC42BE623CD00474DCB /* RMEpisode.swift in Sources */,
 				63D11BA92BE61E4000474DCB /* RMTabBarController.swift in Sources */,
-				63E0782D2BEAC36200E36B8B /* ImageManager.swift in Sources */,
+				63E0782D2BEAC36200E36B8B /* RMImageManager.swift in Sources */,
 				63D11BCB2BE624B500474DCB /* RMEpisodeViewController.swift in Sources */,
 				63E078222BE8A96000E36B8B /* RMCharacterCollectionViewCellViewModel.swift in Sources */,
 				63D11BA52BE61E4000474DCB /* AppDelegate.swift in Sources */,

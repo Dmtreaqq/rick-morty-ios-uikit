@@ -21,24 +21,12 @@ class RMCharacterCollectionViewCellViewModel {
     }
     
     var characterStatusText: String {
-        return "Status: \(characterStatus.text)" 
+        return "Status: \(characterStatus.text)"
     }
     
     func fetchImage(completion: @escaping(Result<Data, Error>) -> Void) {
-        
-        
         guard let characterImageUrl else { completion(.failure(URLError(.badURL))); return }
-        let request = URLRequest(url: characterImageUrl)
         
-        let task = URLSession.shared.dataTask(with: request) { data, _, error in
-            guard let data, error == nil else {
-                completion(.failure(error ?? URLError(.badServerResponse)))
-                return
-            }
-            
-            completion(.success(data))
-        }
-        
-        task.resume()
+        RMImageManager.shared.downloadImage(characterImageUrl, completion: completion)
     }
 }
