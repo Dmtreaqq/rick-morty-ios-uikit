@@ -58,7 +58,16 @@ extension RMCharacterDetailViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        3
+        switch section {
+        case 0:
+            1
+        case 1:
+            8
+        case 2:
+            20
+        default:
+            1
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
